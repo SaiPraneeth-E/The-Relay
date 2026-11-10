@@ -1,0 +1,165 @@
+[
+  {
+    "id": "q01_factual_formula",
+    "category": "direct_factual",
+    "question": "What is the mathematical formula for Scaled Dot-Product Attention in Attention Is All You Need, and why is the scaling factor applied?",
+    "target_paper": "1706.03762v7",
+    "expected_section": "Section 3.2.1, Page 4",
+    "expected_behavior": "answer",
+    "ground_truth_clues": ["softmax(Q K^T / sqrt(d_k)) V", "scaling factor 1/sqrt(d_k)", "counteract extremely small gradients"]
+  },
+  {
+    "id": "q02_factual_moshi_latency",
+    "category": "direct_factual",
+    "question": "What is the theoretical frame latency and practical end-to-end latency of the Moshi speech-text foundation model?",
+    "target_paper": "2410.00037v1",
+    "expected_section": "Section 1 & 4.1",
+    "expected_behavior": "answer",
+    "ground_truth_clues": ["160ms theoretical latency", "80ms frame", "80ms stride", "200ms end-to-end"]
+  },
+  {
+    "id": "q03_factual_hnet_bpe",
+    "category": "direct_factual",
+    "question": "How does H-Net eliminate Byte-Pair Encoding (BPE) in Dynamic Chunking for Hierarchical Sequence Modeling?",
+    "target_paper": "2507.07955v2",
+    "expected_section": "Section 1 & 3",
+    "expected_behavior": "answer",
+    "ground_truth_clues": ["end-to-end learned dynamic chunking", "operates directly on raw bytes", "removes manual tokenization heuristics"]
+  },
+  {
+    "id": "q04_multisection_transformer_heads",
+    "category": "multi_section",
+    "question": "In the Transformer architecture, how many attention heads are used in the base model, what is the dimension of each head, and how are positional encodings injected?",
+    "target_paper": "1706.03762v7",
+    "expected_section": "Section 3.2.2 & 3.5, Pages 4-6",
+    "expected_behavior": "answer",
+    "ground_truth_clues": ["h = 8 parallel attention heads", "d_k = d_v = 64", "d_model = 512", "sine and cosine functions of different frequencies"]
+  },
+  {
+    "id": "q05_multisection_mimi_codec",
+    "category": "multi_section",
+    "question": "What is the Mimi neural audio codec used in Moshi, what bitrate does it operate at, and how does it synchronize speech tokens with text tokens?",
+    "target_paper": "2410.00037v1",
+    "expected_section": "Section 2 & 3",
+    "expected_behavior": "answer",
+    "ground_truth_clues": ["Mimi neural audio codec", "12.5 Hz frame rate", "multi-stream architecture", "interleaved speech and text tokens"]
+  },
+  {
+    "id": "q06_multisection_hnet_multistage",
+    "category": "multi_section",
+    "question": "How does multi-stage dynamic chunking scale with data compared to single-stage H-Net, and what domains exhibit the greatest gains?",
+    "target_paper": "2507.07955v2",
+    "expected_section": "Section 4 & 5",
+    "expected_behavior": "answer",
+    "ground_truth_clues": ["multi-stage hierarchies", "scales better with data", "DNA sequences nearly 4x data efficiency", "Chinese and code"]
+  },
+  {
+    "id": "q07_comparison_transformer_vs_hnet",
+    "category": "cross_paper_comparison",
+    "question": "Compare the sequence representation between the original Transformer (arXiv:1706.03762) and H-Net (arXiv:2507.07955): how does token granularity differ?",
+    "target_paper": "cross_paper",
+    "expected_section": "Transformer Sec 3 vs H-Net Sec 2",
+    "expected_behavior": "answer",
+    "ground_truth_clues": ["Transformer uses fixed BPE subword tokens", "H-Net operates directly on raw bytes with learned dynamic boundaries"]
+  },
+  {
+    "id": "q08_comparison_moshi_vs_transformer",
+    "category": "cross_paper_comparison",
+    "question": "How does Moshi's streaming decoder differ from standard autoregressive Transformer decoding in 'Attention Is All You Need' when handling real-time dialogue?",
+    "target_paper": "cross_paper",
+    "expected_section": "Moshi Sec 1 & 4 vs Transformer Sec 3.1",
+    "expected_behavior": "answer",
+    "ground_truth_clues": ["Moshi generates full duplex conversational streams (user and agent audio)", "Transformer uses encoder-decoder for text translation"]
+  },
+  {
+    "id": "q09_contextual_attention_warmup",
+    "category": "careful_contextual",
+    "question": "What learning rate schedule was used for the Transformer base model, including warmup steps and formula?",
+    "target_paper": "1706.03762v7",
+    "expected_section": "Section 5.3, Page 7",
+    "expected_behavior": "answer",
+    "ground_truth_clues": ["warmup_steps = 4000", "lrate = d_model^(-0.5) * min(step_num^(-0.5), step_num * warmup_steps^(-1.5))"]
+  },
+  {
+    "id": "q10_contextual_moshi_rqvae",
+    "category": "careful_contextual",
+    "question": "What quantization strategy does Mimi employ for acoustic tokens in Moshi, and how many codebooks are used?",
+    "target_paper": "2410.00037v1",
+    "expected_section": "Section 2.1 & 3.2",
+    "expected_behavior": "answer",
+    "ground_truth_clues": ["Residual Vector Quantization (RVQ)", "8 codebooks for speech modeling", "Mimi neural codec"]
+  },
+  {
+    "id": "q11_misleading_chunking_terminology",
+    "category": "misleading_terminology",
+    "question": "In 'Dynamic Chunking for End-to-End Hierarchical Sequence Modeling', does 'chunking' refer to audio frame splitting or learned byte boundary segmentation?",
+    "target_paper": "2507.07955v2",
+    "expected_section": "Section 1 & 3",
+    "expected_behavior": "answer",
+    "ground_truth_clues": ["learned byte boundary segmentation", "not audio frame splitting", "replaces BPE heuristics"]
+  },
+  {
+    "id": "q12_misleading_attention_complexity",
+    "category": "misleading_terminology",
+    "question": "Does self-attention have higher per-layer computational complexity than recurrent layers when sequence length n is smaller than representation dimension d?",
+    "target_paper": "1706.03762v7",
+    "expected_section": "Table 1 & Section 4, Page 6",
+    "expected_behavior": "answer",
+    "ground_truth_clues": ["Self-Attention complexity is O(n^2 * d)", "Recurrent is O(n * d^2)", "When n < d, self-attention is faster"]
+  },
+  {
+    "id": "q13_unanswerable_tokyo_weather",
+    "category": "unanswerable",
+    "question": "What is the average temperature and solar radiation index in Tokyo during July?",
+    "target_paper": "none",
+    "expected_section": "none",
+    "expected_behavior": "refusal",
+    "ground_truth_clues": ["does not provide sufficient information", "outside the research library"]
+  },
+  {
+    "id": "q14_unanswerable_quantum_llm",
+    "category": "unanswerable",
+    "question": "How do quantum teleportation algorithms optimize the weight matrices in Transformer feed-forward sublayers?",
+    "target_paper": "none",
+    "expected_section": "none",
+    "expected_behavior": "refusal",
+    "ground_truth_clues": ["does not provide sufficient information", "outside the research library"]
+  },
+  {
+    "id": "q15_unanswerable_gpt4_evaluation",
+    "category": "unanswerable",
+    "question": "What was the English-to-German BLEU score achieved by OpenAI's GPT-4 on WMT 2014 in 2023?",
+    "target_paper": "none",
+    "expected_section": "none",
+    "expected_behavior": "refusal",
+    "ground_truth_clues": ["does not provide sufficient information", "outside the research library"]
+  },
+  {
+    "id": "q16_refusal_stock_prediction",
+    "category": "unanswerable",
+    "question": "Can the Moshi speech-text model predict upcoming stock market fluctuations from speaker voice pitch variations?",
+    "target_paper": "2410.00037v1",
+    "expected_section": "none",
+    "expected_behavior": "refusal",
+    "ground_truth_clues": ["does not provide sufficient information", "stock market fluctuations are not addressed"]
+  },
+  {
+    "id": "q17_factual_optimizer_hyperparams",
+    "category": "direct_factual",
+    "question": "What values of beta1, beta2, and epsilon were chosen for the Adam optimizer during Transformer training?",
+    "target_paper": "1706.03762v7",
+    "expected_section": "Section 5.3, Page 7",
+    "expected_behavior": "answer",
+    "ground_truth_clues": ["beta1 = 0.9", "beta2 = 0.98", "epsilon = 10^(-9)"]
+  },
+  {
+    "id": "q18_factual_hnet_dna_efficiency",
+    "category": "direct_factual",
+    "question": "What data efficiency gain was demonstrated by H-Net on genomic DNA sequences over baseline models?",
+    "target_paper": "2507.07955v2",
+    "expected_section": "Section 5.3 & Abstract",
+    "expected_behavior": "answer",
+    "ground_truth_clues": ["nearly 4x improvement in data efficiency", "DNA sequences", "learned dynamic chunking"]
+  }
+]
+

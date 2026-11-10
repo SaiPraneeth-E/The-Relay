@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: the-relay-pipeline
+    env: python
+    buildCommand: pip install -r requirements.txt && python scripts/download_papers.py && python -m app.main ingest
+    startCommand: python -m app.main ask "What is Scaled Dot-Product Attention?"
+    envVars:
+      - key: GROQ_API_KEY
+        sync: false
+      - key: DEFAULT_RETRIEVAL_SETTING
+        value: B
+      - key: STANDIN_PROFILE
+        value: normal
+
