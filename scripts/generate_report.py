@@ -25,14 +25,14 @@ def generate_final_report():
     output_md = Path("docs/report.md")
     output_md.parent.mkdir(parents=True, exist_ok=True)
 
-    # Document setup: 2 pages, tight margins
+    # Document setup: exactly 2 pages with professional typography & margins
     doc = SimpleDocTemplate(
         str(output_pdf),
         pagesize=letter,
         leftMargin=26,
         rightMargin=26,
-        topMargin=24,
-        bottomMargin=24
+        topMargin=22,
+        bottomMargin=22
     )
 
     styles = getSampleStyleSheet()
@@ -40,27 +40,35 @@ def generate_final_report():
     title_style = ParagraphStyle(
         "DocTitle",
         fontName="Helvetica-Bold",
-        fontSize=13,
-        leading=15,
+        fontSize=13.5,
+        leading=16,
         textColor=colors.HexColor("#0F172A"),
         spaceAfter=2
+    )
+
+    sub_style = ParagraphStyle(
+        "DocSub",
+        fontName="Helvetica",
+        fontSize=7.2,
+        leading=9.2,
+        textColor=colors.HexColor("#475569")
     )
 
     h1_style = ParagraphStyle(
         "Heading1_Custom",
         fontName="Helvetica-Bold",
-        fontSize=8.5,
-        leading=10.5,
-        textColor=colors.HexColor("#1E293B"),
-        spaceBefore=3,
-        spaceAfter=1
+        fontSize=9.5,
+        leading=11.8,
+        textColor=colors.HexColor("#0F172A"),
+        spaceBefore=3.5,
+        spaceAfter=1.5
     )
 
     body_style = ParagraphStyle(
         "Body_Custom",
         fontName="Helvetica",
-        fontSize=6.8,
-        leading=8.5,
+        fontSize=7.8,
+        leading=9.8,
         textColor=colors.HexColor("#334155"),
         spaceAfter=2.5
     )
@@ -74,8 +82,8 @@ def generate_final_report():
     table_header_style = ParagraphStyle(
         "TableHeader",
         fontName="Helvetica-Bold",
-        fontSize=6.0,
-        leading=7.5,
+        fontSize=6.6,
+        leading=8.2,
         textColor=colors.white,
         alignment=1
     )
@@ -83,8 +91,8 @@ def generate_final_report():
     table_cell_style = ParagraphStyle(
         "TableCell",
         fontName="Helvetica",
-        fontSize=5.8,
-        leading=7.2,
+        fontSize=6.5,
+        leading=8.0,
         textColor=colors.HexColor("#0F172A")
     )
 
@@ -98,8 +106,8 @@ def generate_final_report():
 
     # Title Banner
     elements.append(Paragraph("THE RELAY: Adaptive Evidence-Aware Orchestration (AEO)", title_style))
-    elements.append(Paragraph("<b>Author:</b> Senior AI Infrastructure Engineer &nbsp;|&nbsp; <b>Project:</b> The Relay Pipeline &nbsp;|&nbsp; <b>Library:</b> arXiv:1706.03762v7, arXiv:2410.00037v1, arXiv:2507.07955v2", body_style))
-    elements.append(HRFlowable(width="100%", thickness=0.75, color=colors.HexColor("#64748B"), spaceBefore=1, spaceAfter=3))
+    elements.append(Paragraph("<b>Author:</b> Senior AI Infrastructure Engineer &nbsp;|&nbsp; <b>Project:</b> The Relay Pipeline &nbsp;|&nbsp; <b>Library:</b> arXiv:1706.03762v7, arXiv:2410.00037v1, arXiv:2507.07955v2", sub_style))
+    elements.append(HRFlowable(width="100%", thickness=0.75, color=colors.HexColor("#94A3B8"), spaceBefore=1.5, spaceAfter=2.5))
 
     # SECTION 1
     elements.append(Paragraph("1 &nbsp; What I built and why.", h1_style))
