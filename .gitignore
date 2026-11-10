@@ -31,3 +31,6 @@ htmlcov/
 *.swp
 *.swo
 
+
+# Zip archives
+*.zip
